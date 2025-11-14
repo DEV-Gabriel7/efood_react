@@ -1,26 +1,41 @@
-import Restaurant from '../../models/Restaurants'
+import { RestaurantsApi } from '../../pages/Home'
 import { Card, ButtonCard, CardTitle, CardDescription, Tag, TagContainer } from './styles'
 
+export const getDescription = (descricao: string) => {
+    if (descricao.length > 165) {
+      return descricao.slice(0, 170) + '...'
+    }
+    return descricao
+  }
 
-const Restaurants = ({ destach, image, name, category, assessment, description}: Restaurant) => (
-    <>
-        <Card>
-            <img src={image} />
-            <TagContainer>
-                {destach ? <Tag>Destaque da semana</Tag> : ''}
-                <Tag>{category}</Tag>
-            </TagContainer>
-            <CardTitle>
-                <h3>{name}</h3>
-                <p>{assessment}<span>★</span></p>
-            </CardTitle>
-            <CardDescription>{description}</CardDescription>
-            <ButtonCard to='/menu'>
-                Saiba Mais
-            </ButtonCard>
-            
-        </Card>
-    </>
-)
+const Restaurants = ({
+  id,
+  titulo,
+  destacado,
+  tipo,
+  avaliacao,
+  descricao,
+  capa
+}: RestaurantsApi) => {
+  
+
+  return (
+    <Card>
+      <img src={capa} />
+      <TagContainer>
+        {destacado ? <Tag>Destaque da semana</Tag> : ''}
+        <Tag>{tipo}</Tag>
+      </TagContainer>
+      <CardTitle>
+        <h3>{titulo}</h3>
+        <p>{avaliacao}<span>★</span></p>
+      </CardTitle>
+      <CardDescription>{getDescription(descricao)}</CardDescription>
+      <ButtonCard to={`/menu/${id}`}>
+        Saiba Mais
+      </ButtonCard>
+    </Card>
+  )
+}
 
 export default Restaurants

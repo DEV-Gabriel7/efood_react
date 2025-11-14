@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 export const Card = styled.div`
     max-width: 470px;
+    height: 398px;
     border: 1px solid ${colors.softCoral};
     margin-bottom: 48px;
     overflow: hidden;
     position: relative;
 
-    img{
+    img {
         width: 100%;
-        height: auto;
+        height: 220px;
         object-fit: cover; 
     }
 `
@@ -64,7 +65,7 @@ export const ButtonCard = styled(Link)`
     justify-content: center;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 8px;
-    margin-bottom: 8px;
+    margin: 0 8px 8px;
     text-decoration: none;
+    
 `

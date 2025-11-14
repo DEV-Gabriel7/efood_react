@@ -25,7 +25,6 @@ export const Hero = styled.div`
 
     h1 {
         position: absolute;
-        z-index: 2;
         top: 24px;
         color: ${colors.white};
         font-weight: 100;
@@ -33,7 +32,7 @@ export const Hero = styled.div`
 
     h2 {
         position: absolute;
-        z-index: 2;
+        z-index: 1;
         bottom: 32px;
         color: ${colors.white};
         font-weight: 900;

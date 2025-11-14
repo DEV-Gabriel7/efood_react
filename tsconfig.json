@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "types": ["vite/client"],
-    "jsx": "react-jsx",
+    "target": "es2017",
+    "lib": ["dom", "es2017"],
+    "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
-    "moduleResolution": "node"
-  },
-  "include": ["src", "vite-env.d.ts"]
+    "jsx": "react-jsx"
+  }
 }
