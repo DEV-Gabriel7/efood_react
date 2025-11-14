@@ -1,7 +1,7 @@
+import { RestaurantsApi } from "../../types"
 import Restaurants from "../Restaurants"
 import { RestaurantsContainer } from "./styles"
 
-import { RestaurantsApi } from "../../pages/Home"
   
 
 export type restaurants = {
