@@ -2,18 +2,8 @@ import { useEffect, useState } from "react"
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import RestaurantsList from "../../components/RestaurantsList"
-import { Product } from "../../types"
+import { RestaurantsApi } from "../../types"
 
-export type RestaurantsApi = {
-    id?: number
-    titulo: string
-    destacado?: boolean
-    tipo: string
-    avaliacao?: number
-    descricao: string
-    capa: string
-    cardapio: Product[]
-}
 
 const Home = () => {
     const [restaurantState, setRestaurantState] = useState<RestaurantsApi[]>([])

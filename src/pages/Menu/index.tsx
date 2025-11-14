@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import ProductsList from "../../components/ProductsList"
-import { RestaurantsApi } from "../Home"
 import RestaurantBanner from "../../components/RestaurantBanner"
+import { RestaurantsApi } from "../../types"
 
 const Menu = () => {
   const { id } = useParams<{ id: string }>()
@@ -12,7 +12,6 @@ const Menu = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-
     fetch("https://api-ebac.vercel.app/api/efood/restaurantes")
       .then((res) => res.json())
       .then((res) => {
