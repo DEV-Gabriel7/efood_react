@@ -1,4 +1,3 @@
-import { RestaurantsApi } from '../../pages/Home'
 import { Card, ButtonCard, CardTitle, CardDescription, Tag, TagContainer } from './styles'
 
 export const getDescription = (descricao: string) => {
@@ -8,6 +7,15 @@ export const getDescription = (descricao: string) => {
     return descricao
   }
 
+type Props = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+}
 const Restaurants = ({
   id,
   titulo,
@@ -16,7 +24,7 @@ const Restaurants = ({
   avaliacao,
   descricao,
   capa
-}: RestaurantsApi) => {
+}: Props) => {
   
 
   return (

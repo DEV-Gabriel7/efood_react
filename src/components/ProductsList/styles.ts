@@ -116,4 +116,5 @@ export const AddCartButton = styled.button`
     border: none;
     font-size: 14px;
     font-weight: 700;
+    cursor: pointer;
 `

@@ -1,16 +1,14 @@
-import { RestaurantsApi } from "../../types"
+import { useGetRestaurantesQuery } from "../../services/api"
 import Restaurants from "../Restaurants"
 import { RestaurantsContainer } from "./styles"
 
-  
+const RestaurantsList = () => {
+    const { data: restaurants, isLoading } = useGetRestaurantesQuery()
 
-export type restaurants = {
-    restaurant: RestaurantsApi[]
-}
-
-const RestaurantsList = ({ restaurant }: restaurants) => (
+    if (!restaurants) return null 
+    return (
     <RestaurantsContainer>
-        {restaurant.map((restaurant) => (
+        {restaurants.map((restaurant) => (
             <Restaurants 
                 id={restaurant.id}
                 capa={restaurant.capa}
@@ -25,6 +23,8 @@ const RestaurantsList = ({ restaurant }: restaurants) => (
         ))}
         
     </RestaurantsContainer>
-)
+    )
+}
+    
 
 export default RestaurantsList

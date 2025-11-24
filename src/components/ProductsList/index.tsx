@@ -16,6 +16,8 @@ import {
 } from './styles'
 import { Product } from '../../types'
 import { getDescription } from '../Restaurants'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
 
 type CardProps = {
   cardMenu: Product[]
@@ -31,6 +33,19 @@ const ProductsList = ({ cardMenu }: CardProps) => {
 
   const closeModal = () => setModal({ isVisible: false })
 
+  const dispatch = useDispatch()
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
+  const addToCart = () => {
+    if (modal.product) {
+      dispatch(add(modal.product))
+      dispatch(open())
+    }
+  }
+
   return (
     <div className="container">
       <ProductsContainer>
@@ -42,7 +57,7 @@ const ProductsList = ({ cardMenu }: CardProps) => {
             <ButtonAddCart
               onClick={() => setModal({ isVisible: true, product: item })}
             >
-              Adicionar ao carrinho
+              Ver mais detalhes
             </ButtonAddCart>
           </ProductCard>
         ))}
@@ -57,10 +72,13 @@ const ProductsList = ({ cardMenu }: CardProps) => {
               <div>
                 <ModalTitle>{modal.product.nome}</ModalTitle>
                 <ModalDescription>
-                  {modal.product.descricao}<br/><br/><br/><br/>
+                  {modal.product.descricao}<br /><br /><br /><br />
                   Serve de: {modal.product.porcao}
                 </ModalDescription>
-                <AddCartButton>
+                <AddCartButton onClick={() => {
+                  addToCart()
+                  openCart()
+                }}>
                   Adicionar ao carrinho - R${' '}
                   {modal.product.preco.toFixed(2)}
                 </AddCartButton>

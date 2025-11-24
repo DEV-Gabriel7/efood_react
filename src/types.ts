@@ -1,3 +1,5 @@
+import { JSX } from "react/jsx-runtime"
+
 export type Product = {
   foto: string
   preco: number

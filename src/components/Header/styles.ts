@@ -31,7 +31,7 @@ export const HeaderDiv = styled.div<Omit<Props, 'button' | 'text'>>`
   }
 `
 
-export const HeaderTitle = styled.h1<Omit<Props, 'button'>>`
+export const HeaderTitle = styled.a<Omit<Props, 'button'>>`
   color: ${colors.softCoral};
   font-weight: 900;
   text-align: center;
