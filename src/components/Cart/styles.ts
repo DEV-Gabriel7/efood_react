@@ -1,35 +1,18 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
+import { CartModal, Overlay, ModalContainer, Button } from "../../styles/modal";
 
-export const CartModal = styled.div`
-    display: none;  
+type MarginTop = {
+    margin: 'cart'
+}
 
-    &.is-open{
-        display: block;
-    }
+export { CartModal, Overlay };
+
+export const CartContainer = styled(ModalContainer)``
+
+export const CartBtn = styled(Button)<MarginTop>`
+    margin-top: ${props => props.margin === 'cart' ? '32px' : '16px'};
 `
-
-export const Overlay = styled.div`
-    background-color: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-`
-
-export const CartContainer = styled.aside`
-    height: 100%;
-    width: 360px;
-    background-color: ${colors.softCoral};
-    position: fixed;
-    right: 0;
-    top: 0;
-    padding: 8px;
-    z-index: 99; 
-`
-
 export const CartItem = styled.div`
     width: 340px;
     height: 100px;
@@ -78,13 +61,4 @@ export const CartContainerContent = styled.div`
         font-weight: bold;
         font-size: 14px;
     }
-`
-
-export const CartBtn = styled.button`
-    width: 100%;
-    padding: 4px;
-    background-color: ${colors.softPeach};
-    border: none;
-    font-weight: 700;
-    margin-top: 16px;
 `

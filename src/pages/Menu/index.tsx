@@ -10,7 +10,7 @@ const Menu = () => {
   const { id } = useParams<{ id: string }>()
   const { data: restaurantes, isLoading, isError } = useGetRestaurantesQuery()
 
-  console.log("API retornou:", restaurantes) // ✔ é um array
+  console.log("API retornou:", restaurantes)
 
   if (isLoading) return <p>Carregando...</p>
   if (isError) return <p>Erro ao carregar dados.</p>

@@ -7,6 +7,7 @@ const Home = () => {
     <>
         <Header page='home' text="Viva experiências gastronômicas no conforto da sua casa" />
         <RestaurantsList />
+
         <Footer />
     </>
 )

@@ -1,27 +1,29 @@
-import { CartBtn, CartContainer, CartContainerContent, CartItem, CartModal, DeleteButton, Overlay, ProductName, ProductPrice } from "./styles"
-import trash from '../../assets/images/trash.png'
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../store"
+import { useNavigate } from "react-router-dom"
 import { close, remove } from "../../store/reducers/cart"
+import { RootState } from "../../store"
+import { CartModal, Overlay, CartContainer, CartItem, ProductName, ProductPrice, DeleteButton, CartContainerContent, CartBtn } from "./styles"
+import trash from "../../assets/images/trash.png"
 
 const Cart = () => {
-    //const isOpen = useSelector((state: RootState) => state.cart.isOpen)
     const { isOpen, items } = useSelector((state: RootState) => state.cart)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const closeCart = () => {
         dispatch(close())
     }
 
-    const getTotalPrice = () => {
-        return items.reduce((accumulator, currentValue) => {
-            return (accumulator += currentValue.preco)
-        }, 0)
-    }
+    const totalPrice = items.reduce((accumulator, currentValue) => accumulator + currentValue.preco, 0).toFixed(2)
 
     const removeItem = (id: number) => {
         dispatch(remove(id))
+    }
+
+    const goToCheckout = () => {
+        navigate('/checkout')
+        dispatch(close())
     }
 
     return (
@@ -42,13 +44,11 @@ const Cart = () => {
                     </CartItem>
                 ))}
 
-
                 <CartContainerContent>
                     <p>Valor total</p>
-                    <p>R$ {getTotalPrice().toFixed(2)}</p>
+                    <p>R$ {totalPrice}</p>
                 </CartContainerContent>
-                <CartBtn>Continuar para entrega</CartBtn>
-
+                <CartBtn margin='cart' onClick={goToCheckout}>Continuar para entrega</CartBtn>
             </CartContainer>
 
         </CartModal>
