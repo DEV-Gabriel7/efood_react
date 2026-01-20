@@ -9,10 +9,10 @@ import { DeliveryData, PaymentData } from '../types'
 import { MESSAGES } from '../types'
 import { validateDelivery, validatePayment } from '../types'
 
-export type CheckoutStep = 'initial' | 'delivery' | 'payment' | 'confirmation'
+export type CheckoutStep = 'delivery' | 'payment' | 'confirmation'
 
 export const useCheckout = () => {
-  const [step, setStep] = useState<CheckoutStep>('initial')
+  const [step, setStep] = useState<CheckoutStep>('delivery')
   const [deliveryData, setDeliveryData] = useState<DeliveryData | null>(null)
   const [paymentData, setPaymentData] = useState<PaymentData | null>(null)
   const [errors, setErrors] = useState<string[]>([])
@@ -22,10 +22,6 @@ export const useCheckout = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [placeOrder, { isLoading }] = usePlaceOrderMutation()
-
-  const handleStartCheckout = () => {
-    setStep('delivery')
-  }
 
   const handleDeliveryNext = (data: DeliveryData) => {
     const validationErrors = validateDelivery(data)
@@ -92,7 +88,6 @@ export const useCheckout = () => {
     isLoading,
     errors,
     isSubmitting,
-    handleStartCheckout,
     handleDeliveryNext,
     handlePaymentNext,
     handleBackToCart,

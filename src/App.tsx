@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle } from "./styles"
 
 import Rotas from './routes'
+import CheckoutDrawer from './components/CheckoutDrawer'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
@@ -11,6 +12,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <GlobalStyle />
+        <CheckoutDrawer />
         <Rotas />
       </BrowserRouter>
     </Provider>

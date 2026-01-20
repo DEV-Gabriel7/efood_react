@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 
+type InputStyledProps = {
+  hasError?: boolean
+}
+
 export const Label = styled.label`
   display: block;
   color: ${colors.softPeach};
@@ -9,7 +13,7 @@ export const Label = styled.label`
   font-size: 14px;
 `
 
-export const Input = styled.input`
+export const Input = styled.input<InputStyledProps>`
   width: 100%;
   background-color: ${colors.softPeach};
   border: 2px solid transparent;
@@ -18,14 +22,11 @@ export const Input = styled.input`
   margin-bottom: 8px;
   border-radius: 4px;
   font-size: 16px;
+  border-color: ${props => props.hasError ? '#e74c3c' : 'transparent'};
 
   &:focus {
     outline: none;
-    border-color: ${colors.softCoral};
-  }
-
-  &:invalid {
-    border-color: #e74c3c;
+    border-color: ${props => props.hasError ? '#e74c3c' : colors.softCoral};
   }
 
   @media (max-width: 768px) {

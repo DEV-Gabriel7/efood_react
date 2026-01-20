@@ -86,6 +86,18 @@ export type DeliveryData = {
   }
 }
 
+export type PaymentData = {
+  card: {
+    name: string
+    number: number
+    code: number
+    expires: {
+      month: number
+      year: number
+    }
+  }
+}
+
 export const MESSAGES = {
   CHECKOUT_TITLE: 'Checkout',
   CHECKOUT_DESCRIPTION: 'Revise seus produtos e continue para o pagamento',
@@ -120,11 +132,34 @@ export const MESSAGES = {
 export const validateDelivery = (data: DeliveryData): string[] => {
   const errors: string[] = []
 
-  if (!data.receiver.trim()) errors.push('Nome do destinatário é obrigatório')
-  if (!data.address.description.trim()) errors.push('Endereço é obrigatório')
-  if (!data.address.city.trim()) errors.push('Cidade é obrigatório')
-  if (!data.address.zipCode || data.address.zipCode.toString().length !== 8) errors.push('CEP deve ter 8 dígitos')
-  if (!data.address.number || data.address.number <= 0) errors.push('Número é obrigatório')
+  // Validar nome do destinatário
+  if (!data.receiver || !data.receiver.trim()) {
+    errors.push('Nome do destinatário é obrigatório')
+  } else if (data.receiver.trim().length < 3) {
+    errors.push('Nome deve ter pelo menos 3 caracteres')
+  }
+
+  // Validar endereço
+  if (!data.address.description || !data.address.description.trim()) {
+    errors.push('Endereço é obrigatório')
+  }
+
+  // Validar cidade
+  if (!data.address.city || !data.address.city.trim()) {
+    errors.push('Cidade é obrigatório')
+  }
+
+  // Validar CEP
+  if (!data.address.zipCode) {
+    errors.push('CEP é obrigatório')
+  } else if (data.address.zipCode.toString().replace(/\D/g, '').length !== 8) {
+    errors.push('CEP deve ter 8 dígitos')
+  }
+
+  // Validar número
+  if (!data.address.number || data.address.number <= 0) {
+    errors.push('Número é obrigatório')
+  }
 
   return errors
 }
@@ -134,27 +169,49 @@ export const validatePayment = (data: PaymentData): string[] => {
   const currentYear = new Date().getFullYear()
   const currentMonth = new Date().getMonth() + 1
 
-  if (!data.card.name.trim()) {
+  // Validar nome no cartão
+  if (!data.card.name || !data.card.name.trim()) {
     errors.push('Nome no cartão é obrigatório')
+  } else if (data.card.name.trim().length < 3) {
+    errors.push('Nome no cartão deve ter pelo menos 3 caracteres')
   } else if (data.card.name.trim().split(' ').length < 2) {
-    errors.push('Nome no cartão deve ter pelo menos nome e sobrenome')
+    errors.push('Nome no cartão deve ter nome e sobrenome')
   }
 
-  if (!data.card.number || data.card.number.toString().length !== 16) {
-    errors.push('Número do cartão deve ter exatamente 16 dígitos')
+  // Validar número do cartão
+  if (!data.card.number) {
+    errors.push('Número do cartão é obrigatório')
+  } else {
+    const cardNumber = data.card.number.toString().replace(/\D/g, '')
+    if (cardNumber.length !== 16) {
+      errors.push('Número do cartão deve ter 16 dígitos')
+    }
   }
 
-  if (!data.card.code || data.card.code < 100 || data.card.code > 9999) {
-    errors.push('CVV deve ter 3 ou 4 dígitos')
+  // Validar CVV
+  if (!data.card.code) {
+    errors.push('CVV é obrigatório')
+  } else {
+    const cvv = data.card.code.toString().replace(/\D/g, '')
+    if (cvv.length < 3 || cvv.length > 4) {
+      errors.push('CVV deve ter 3 ou 4 dígitos')
+    }
   }
 
-  if (!data.card.expires.month || data.card.expires.month < 1 || data.card.expires.month > 12) {
-    errors.push('Mês de vencimento inválido')
+  // Validar mês de vencimento
+  if (!data.card.expires.month) {
+    errors.push('Mês de vencimento é obrigatório')
+  } else if (data.card.expires.month < 1 || data.card.expires.month > 12) {
+    errors.push('Mês de vencimento deve estar entre 01 e 12')
   }
 
-  if (!data.card.expires.year || data.card.expires.year < currentYear ||
-      (data.card.expires.year === currentYear && data.card.expires.month < currentMonth)) {
-    errors.push('Data de vencimento deve ser futura')
+  // Validar ano de vencimento
+  if (!data.card.expires.year) {
+    errors.push('Ano de vencimento é obrigatório')
+  } else if (data.card.expires.year < currentYear) {
+    errors.push('Cartão expirado')
+  } else if (data.card.expires.year === currentYear && data.card.expires.month < currentMonth) {
+    errors.push('Cartão expirado')
   }
 
   return errors

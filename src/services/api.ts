@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { RestaurantsApi, Order } from '../types'
+import { RestaurantsApi, Order, OrderResponse } from '../types'
 
 const api = createApi({
     baseQuery: fetchBaseQuery({
@@ -9,7 +9,7 @@ const api = createApi({
         getRestaurantes: builder.query<RestaurantsApi[], void>({
             query: () => '/restaurantes'
         }),
-        placeOrder: builder.mutation<Order, Order>({
+        placeOrder: builder.mutation<OrderResponse, Order>({
             query: (order) => ({
                 url: '/checkout',
                 method: 'POST',

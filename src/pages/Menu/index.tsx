@@ -3,7 +3,6 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import ProductsList from "../../components/ProductsList"
 import RestaurantBanner from "../../components/RestaurantBanner"
-import Cart from "../../components/Cart"
 import { useGetRestaurantesQuery } from "../../services/api"
 
 const Menu = () => {
@@ -28,7 +27,6 @@ const Menu = () => {
       <RestaurantBanner menu={restaurante} />
       <ProductsList cardMenu={restaurante.cardapio || []} />
       <Footer />
-      <Cart />
     </>
   )
 }

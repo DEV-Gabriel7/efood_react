@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
-import { CartModal, Overlay, ModalContainer, Button } from "../../styles/modal";
+import { CartModal, Overlay, CartDrawer, Button } from "../../styles/modal";
 
 type MarginTop = {
     margin: 'cart'
@@ -8,7 +8,7 @@ type MarginTop = {
 
 export { CartModal, Overlay };
 
-export const CartContainer = styled(ModalContainer)``
+export const CartContainer = styled(CartDrawer)``
 
 export const CartBtn = styled(Button)<MarginTop>`
     margin-top: ${props => props.margin === 'cart' ? '32px' : '16px'};

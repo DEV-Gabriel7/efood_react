@@ -77,6 +77,7 @@ const ProductsList = ({ cardMenu }: CardProps) => {
                 </ModalDescription>
                 <AddCartButton onClick={() => {
                   addToCart()
+                  closeModal()
                   openCart()
                 }}>
                   Adicionar ao carrinho - R${' '}

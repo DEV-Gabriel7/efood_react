@@ -1,94 +1,64 @@
 import styled from 'styled-components'
+import { CartDrawer } from '../../styles/modal'
+import { colors } from '../../styles'
 
-export const ConfirmationContainer = styled.div`
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 32px;
-  background-color: #fff;
-  border-radius: 8px;
+export const ConfirmationContainer = styled(CartDrawer)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
 
-  h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #e66767;
-  }
+export const ConfirmationMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
   p {
-    margin-bottom: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.6;
+    color: ${colors.softPeach};
+    margin: 0;
+    text-align: justify;
   }
 `
 
-export const OrderDetails = styled.div`
-  margin-bottom: 24px;
-  padding: 16px;
-  background-color: #fff8f2;
+export const OrderInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background-color: ${colors.softPeach};
   border-radius: 4px;
 
-  h3 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #e66767;
-  }
-
   p {
-    margin-bottom: 4px;
     font-size: 14px;
-  }
+    color: #333;
+    margin: 0;
 
-  .product-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    padding: 8px;
-    background-color: #fff;
-    border-radius: 4px;
-
-    img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-right: 12px;
-    }
-
-    h4 {
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    p {
-      font-size: 12px;
-      color: #e66767;
+    strong {
       font-weight: bold;
     }
-  }
-
-  .total {
-    font-size: 16px;
-    color: #e66767;
-    text-align: right;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid #e66767;
   }
 `
 
 export const ConfirmationButton = styled.button`
-  background-color: #e66767;
-  color: #ffebd9;
+  width: 100%;
+  background-color: ${colors.softCoral};
+  color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 12px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 24px;
+  margin-top: 8px;
 
   &:hover {
-    background-color: #ce5a5a;
+    background-color: #e55555;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
 `

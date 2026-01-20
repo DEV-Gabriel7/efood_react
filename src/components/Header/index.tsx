@@ -7,7 +7,7 @@ import { RootState } from '../../store'
 export type Props = {
     button?: boolean
     text: string
-    page: 'home' | 'menu';
+    page: 'home' | 'menu' | 'checkout';
 }
 
 

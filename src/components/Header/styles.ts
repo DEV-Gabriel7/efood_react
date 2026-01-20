@@ -27,7 +27,7 @@ export const HeaderDiv = styled.div<Omit<Props, 'button' | 'text'>>`
   }
 
   img {
-    margin-top: ${({ page }) => (page === 'menu' ? '0' : '64px')};
+    margin-top: ${({ page }) => (page === 'menu' ? '0' : page === 'checkout' ? '0' : '64px')};
   }
 `
 
@@ -38,6 +38,10 @@ export const HeaderTitle = styled.a<Omit<Props, 'button'>>`
 
   ${({ page }) =>
     page === "menu" ? `
+        font-size: 18px;
+        margin: 0;
+      `
+      : page === "checkout" ? `
         font-size: 18px;
         margin: 0;
       `
