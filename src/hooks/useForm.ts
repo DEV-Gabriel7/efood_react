@@ -10,7 +10,7 @@ export function useForm<T>(initialData: T) {
       const keys = id.split('.')
       const updateNested = (obj: any, keys: string[], value: any): any => {
         if (keys.length === 1) {
-          return { ...obj, [keys[0]]: type === 'number' ? parseInt(value) || 0 : value }
+          return { ...obj, [keys[0]]: type === 'number' ? value : value }
         }
         const [current, ...rest] = keys
         return { ...obj, [current]: updateNested(obj[current], rest, value) }
